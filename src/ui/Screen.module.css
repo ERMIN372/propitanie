@@ -1,0 +1,23 @@
+.screen {
+  max-width: var(--col-max);
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top) + var(--s-5)) var(--s-4) calc(var(--tabbar-h) + env(safe-area-inset-bottom) + var(--s-6));
+  min-height: 100dvh;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-bottom: var(--s-5);
+}
+
+.title {
+  font-size: 26px;
+}
+
+.stack {
+  display: grid;
+  gap: var(--s-4);
+}
