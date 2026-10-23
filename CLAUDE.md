@@ -1,6 +1,7 @@
 # Пропитание
 
-Личный планировщик питания на двоих: онбординг с нормой, план на неделю, список покупок, сессии готовки впрок.
+Личный планировщик питания для двух человек, у каждого всё своё: онбординг с нормой, план на неделю, список покупок,
+сессии готовки впрок. Общая только база рецептов (базовые + свои из recipes/custom). Чужие данные можно смотреть, менять нельзя.
 Хостинг GitHub Pages, данные в приватном репо `ERMIN372/propitanie_bd` через GitHub REST API. Бэкенда нет.
 
 ## Стек
@@ -50,8 +51,8 @@ meta.json                          { schemaVersion, createdAt }
 profiles.json                      { schemaVersion, updatedAt, profiles: { id, name, colorKey, createdAt }[] }
 users/{pid}/profile.json           параметры, kcalAdjust, лайки/дизлайки, исключения, история веса, mealsPerDay, kitchen
 users/{pid}/plans/{YYYY-Www}.json  slots: Record<"day:meal", { recipeId|null, portions, manual, updatedAt }>
-users/{pid}/prep/{YYYY-Www}.json   cookDays, forProfiles, doneSteps
-shared/shopping/{YYYY-Www}.json    items: Record<id, { name, amount, unit, category, staple, usedIn, checked, manual, removed, updatedAt }>
+users/{pid}/prep/{YYYY-Www}.json   cookDays, doneSteps (только блюда из своего плана)
+users/{pid}/shopping/{YYYY-Www}.json items: Record<id, { name, amount, unit, category, staple, usedIn, checked, manual, removed, updatedAt }>
 recipes/custom/{id}.json           Recipe
 ingredients/custom/{id}.json       Ingredient
 ```

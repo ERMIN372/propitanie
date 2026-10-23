@@ -8,11 +8,8 @@ import { DAY_SHORT } from '../../lib/week';
 import { useToast } from '../../ui/Toast';
 import s from './PrepScreen.module.css';
 
-const WHO = ['Мои', 'Её', 'Обоих'] as const;
-
 export function PrepScreen() {
   const [days, setDays] = useState<Set<number>>(() => new Set([6, 2]));
-  const [who, setWho] = useState<(typeof WHO)[number]>('Обоих');
   const toast = useToast();
 
   const toggle = (i: number) =>
@@ -36,20 +33,10 @@ export function PrepScreen() {
           ))}
         </div>
       </Card>
-      <Card>
-        <p className={s.label}>Чьи блюда</p>
-        <div className={s.chips} role="group" aria-label="Чьи блюда">
-          {WHO.map((w) => (
-            <Chip key={w} selected={who === w} onClick={() => setWho(w)}>
-              {w}
-            </Chip>
-          ))}
-        </div>
-      </Card>
       <Card className={s.summary}>
         <Tape tilt={1.5}>{n === 0 ? 'Выбери дни' : `${n} ${n === 1 ? 'заход' : n < 5 ? 'захода' : 'заходов'}`}</Tape>
         <p className={s.summaryText}>
-          Разложу блюда из плана по заходам с учётом срока хранения, склею одинаковую нарезку и запущу долгие шаги первыми.
+          Разложу блюда из твоего плана по заходам с учётом срока хранения, склею одинаковую нарезку и запущу долгие шаги первыми.
         </p>
         <Button block disabled={n === 0} onClick={() => toast('Сессии готовки появятся на этапе 7')}>
           Начать готовку

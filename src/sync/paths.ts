@@ -28,7 +28,7 @@ const PATTERNS: { re: RegExp; kind: DocKind; owner?: number; week?: number }[] =
   { re: /^users\/([\w-]+)\/profile\.json$/, kind: 'profile', owner: 1 },
   { re: /^users\/([\w-]+)\/plans\/(\d{4}-W\d{2})\.json$/, kind: 'plan', owner: 1, week: 2 },
   { re: /^users\/([\w-]+)\/prep\/(\d{4}-W\d{2})\.json$/, kind: 'prep', owner: 1, week: 2 },
-  { re: /^shared\/shopping\/(\d{4}-W\d{2})\.json$/, kind: 'shopping', week: 1 },
+  { re: /^users\/([\w-]+)\/shopping\/(\d{4}-W\d{2})\.json$/, kind: 'shopping', owner: 1, week: 2 },
   { re: /^recipes\/custom\/[\w-]+\.json$/, kind: 'customRecipe' },
   { re: /^ingredients\/custom\/[\w-]+\.json$/, kind: 'customIngredient' },
 ];
@@ -86,7 +86,7 @@ export const paths = {
   profile: (pid: string) => `users/${pid}/profile.json`,
   plan: (pid: string, week: string) => `users/${pid}/plans/${week}.json`,
   prep: (pid: string, week: string) => `users/${pid}/prep/${week}.json`,
-  shopping: (week: string) => `shared/shopping/${week}.json`,
+  shopping: (pid: string, week: string) => `users/${pid}/shopping/${week}.json`,
   customRecipe: (id: string) => `recipes/custom/${id}.json`,
   customIngredient: (id: string) => `ingredients/custom/${id}.json`,
 };
@@ -106,9 +106,9 @@ export function defaultDoc(path: string): unknown {
     case 'plan':
       return { schemaVersion: 1, updatedAt: t, week: p.week!, seed: 0, mealsPerDay: 4, slots: {} } satisfies PlanDoc;
     case 'prep':
-      return { schemaVersion: 1, updatedAt: t, week: p.week!, cookDays: [], forProfiles: [], doneSteps: {} } satisfies PrepDoc;
+      return { schemaVersion: 1, updatedAt: t, week: p.week!, cookDays: [], doneSteps: {} } satisfies PrepDoc;
     case 'shopping':
-      return { schemaVersion: 1, updatedAt: t, week: p.week!, sourceProfiles: [], items: {} } satisfies ShoppingDoc;
+      return { schemaVersion: 1, updatedAt: t, week: p.week!, items: {} } satisfies ShoppingDoc;
     default:
       return null;
   }

@@ -7,7 +7,7 @@ import { SyncEngine, type EngineStatus } from './engine';
 import { writeDoc, deleteDoc, ReadOnlyError } from './docs';
 import { defaultDoc, paths } from './paths';
 import { useSession } from '../stores/session';
-import type { PlanDoc, ProfilesDoc } from '../schemas/docs';
+import type { PlanDoc, ProfilesDoc, ShoppingDoc } from '../schemas/docs';
 
 const ME = 'me_profile1';
 const OTHER = 'other_prof2';
@@ -168,6 +168,13 @@ describe('чтение', () => {
 describe('только чтение для чужих данных', () => {
   it('чужой план записать нельзя', async () => {
     await expect(writeDoc<PlanDoc>(paths.plan(OTHER, WEEK), (p) => p)).rejects.toBeInstanceOf(ReadOnlyError);
+  });
+
+  it('список покупок у каждого свой: свой пишется, чужой нет', async () => {
+    expect(paths.shopping(ME, WEEK)).toBe(`users/${ME}/shopping/${WEEK}.json`);
+    await expect(writeDoc<ShoppingDoc>(paths.shopping(OTHER, WEEK), (d) => d)).rejects.toBeInstanceOf(ReadOnlyError);
+    const own = await writeDoc<ShoppingDoc>(paths.shopping(ME, WEEK), (d) => d);
+    expect(own.week).toBe(WEEK);
   });
 });
 

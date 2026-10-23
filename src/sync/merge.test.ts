@@ -60,7 +60,6 @@ const shop = (items: ShoppingDoc['items'], updatedAt = T1): ShoppingDoc => ({
   schemaVersion: 1,
   updatedAt,
   week: '2026-W43',
-  sourceProfiles: ['p1', 'p2'],
   items,
 });
 
@@ -76,7 +75,7 @@ describe('мёрдж списка покупок по позициям', () => {
 
 describe('мёрдж сессии готовки', () => {
   it('объединяет выполненные шаги', () => {
-    const base: PrepDoc = { schemaVersion: 1, updatedAt: T1, week: '2026-W43', cookDays: [7], forProfiles: ['p1'], doneSteps: {} };
+    const base: PrepDoc = { schemaVersion: 1, updatedAt: T1, week: '2026-W43', cookDays: [7], doneSteps: {} };
     const local = { ...base, doneSteps: { s1: T2, s2: T2 } };
     const remote = { ...base, updatedAt: T2, doneSteps: { s2: T1, s3: T3 } };
     const m = mergePrep(local, remote);

@@ -54,7 +54,6 @@ export const prepSchema = z.object({
   ...versioned,
   week: weekId,
   cookDays: z.array(z.number().int().min(1).max(7)),
-  forProfiles: z.array(z.string()),
   doneSteps: z.record(z.string(), isoTime),
 });
 export type PrepDoc = z.infer<typeof prepSchema>;
@@ -79,7 +78,6 @@ export type ShoppingItem = z.infer<typeof shoppingItem>;
 export const shoppingSchema = z.object({
   ...versioned,
   week: weekId,
-  sourceProfiles: z.array(z.string()),
   items: z.record(z.string(), shoppingItem),
 });
 export type ShoppingDoc = z.infer<typeof shoppingSchema>;

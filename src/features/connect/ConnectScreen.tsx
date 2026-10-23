@@ -47,7 +47,7 @@ function TokenStep() {
         <Tape size="big" tilt={-2}>
           Пропитание
         </Tape>
-        <p className={s.lead}>План еды на двоих, список покупок и готовка впрок. Подключи репо с данными, чтобы начать.</p>
+        <p className={s.lead}>Свой план еды под твою норму, список покупок и готовка впрок. Подключи репо с данными, чтобы начать.</p>
       </div>
       <Card>
         <form className={s.form} onSubmit={submit}>
