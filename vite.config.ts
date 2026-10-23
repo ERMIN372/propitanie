@@ -19,4 +19,8 @@ function cspMeta(): Plugin {
 export default defineConfig({
   base: '/propitanie/',
   plugins: [react(), cspMeta()],
+  build: {
+    // мелкие шрифты Vite по умолчанию вшивает как data:, а CSP разрешает шрифты только с 'self'
+    assetsInlineLimit: (file) => (/\.(woff2?|ttf)$/.test(file) ? false : undefined),
+  },
 });

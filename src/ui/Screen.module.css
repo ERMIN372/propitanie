@@ -1,8 +1,8 @@
 .screen {
   max-width: var(--col-max);
   margin: 0 auto;
-  padding: calc(env(safe-area-inset-top) + var(--s-5)) var(--s-4) calc(var(--tabbar-h) + env(safe-area-inset-bottom) + var(--s-6));
-  min-height: 100dvh;
+  /* сверху шапка TopBar, она сама учитывает safe-area */
+  padding: var(--s-3) var(--s-4) calc(var(--tabbar-h) + env(safe-area-inset-bottom) + var(--s-6));
 }
 
 .head {

@@ -21,3 +21,18 @@
   color: var(--ink-2);
   font-size: 14px;
 }
+
+.section {
+  display: grid;
+  gap: var(--s-3);
+  justify-items: start;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: var(--rim);
+  background: var(--c);
+  box-shadow: var(--glint), inset 0 0 0 8px var(--surface);
+}

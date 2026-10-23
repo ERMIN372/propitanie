@@ -1,4 +1,5 @@
 .chip {
+  flex: none;
   display: inline-flex;
   flex-direction: column;
   align-items: center;

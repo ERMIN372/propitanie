@@ -5,8 +5,9 @@
 
 ## Стек
 Vite 8, React 19, TypeScript 6.0 (strict; TS 7 не поддерживается typescript-eslint), react-router 8 (`HashRouter`),
-Zustand, CSS Modules + CSS-переменные, шрифты `@fontsource-variable/*`, Vitest, ESLint (flat config).
-Позже: Dexie, zod, framer-motion (только свайпы и "отклеивание" скотча), vite-plugin-pwa 1.x.
+Zustand, Dexie (IndexedDB), zod 4, nanoid, CSS Modules + CSS-переменные, шрифты `@fontsource-variable/*`,
+Vitest + fake-indexeddb, ESLint (flat config).
+Позже: framer-motion (только свайпы и "отклеивание" скотча), vite-plugin-pwa 1.x.
 
 ## Команды
 ```
@@ -23,15 +24,24 @@ npm run build
 ```
 src/styles     tokens.css (дизайн-токены, темы Эмаль/Чугун), global.css
 src/ui         примитивы: Tape, Bowl, Button, Chip, Card, DishCard, MacroBars, Screen, TabBar, Toast, EmptyState
-src/features   экраны: plan, shopping, prep, recipes, profile (+ connect, onboarding позже)
+src/features   экраны: connect (токен, выбор/создание профиля), shell (TopBar), plan, shopping, prep, recipes, profile
 src/lib        чистая логика с тестами: week.ts (+ nutrition, planner, shopping, prep позже)
-src/stores     Zustand
-src/sync       (этап 2) github.ts, base64.ts, db.ts, outbox.ts, merge.ts, poller.ts
-src/schemas    (этап 2) zod-схемы и миграции
+src/stores     Zustand: session (токен/ветка/профиль в localStorage), sync (статус), theme
+src/schemas    zod-схемы всех файлов propitanie_bd + migrateVersion
+src/sync       github.ts   клиент REST API, ошибки по кодам (тексты без токена)
+               base64.ts   UTF-8 base64 через TextEncoder/TextDecoder
+               db.ts       Dexie: docs (кэш файлов), outbox (очередь), kv
+               paths.ts    путь → тип, схема, дефолт, мёрдж
+               merge.ts    стратегии мёрджа при 409
+               engine.ts   SyncEngine: debounce 2 с, отправка по одной, до 3 попыток при 409, pull по дереву
+               runtime.ts  живой движок: старт, раз в 60 с, при возврате на вкладку и при online
+               docs.ts     writeDoc/putDoc/deleteDoc/useDoc для UI, запрет записи в чужие users/{pid}
+src/test       fakeGithub.ts: GitHub API в памяти для тестов
 src/data       ingredients.json, recipes.json (публичные базовые данные)
 ```
 Деплой: `.github/workflows/deploy.yml`, push в `main` → validate:data, typecheck, lint, test, build → Pages.
 Vite `base: '/propitanie/'`. CSP добавляется meta-тегом только в прод-сборке (плагин в `vite.config.ts`).
+Шрифты не инлайнятся в data: (`assetsInlineLimit`), иначе их блокирует `font-src 'self'`.
 
 ## Схема данных (propitanie_bd)
 Каждый файл: `schemaVersion`, `updatedAt`, zod-схема, функция миграции.
@@ -45,8 +55,19 @@ shared/shopping/{YYYY-Www}.json    items: Record<id, { name, amount, unit, categ
 recipes/custom/{id}.json           Recipe
 ingredients/custom/{id}.json       Ingredient
 ```
-Мёрдж при 409: планы и покупки по слотам/позициям (свежий updatedAt), prep объединением doneSteps, профиль целиком.
-Схема пока согласована на уровне плана, изменения схемы согласовывать с владельцем.
+Мёрдж при 409: планы и покупки по слотам/позициям (свежий updatedAt), prep объединением doneSteps, профиль целиком,
+profiles.json объединением по id. При равном updatedAt побеждает удалённая версия.
+Схема согласована с владельцем, изменения схемы согласовывать.
+
+## Синхронизация
+- UI читает только из IndexedDB (`useDoc`). Запись: `writeDoc` → локально + outbox → PUT через 2 с.
+- Чтение: один `GET /git/trees/{branch}?recursive=1` с `If-None-Match`; скачиваются только файлы с новым sha.
+  Сразу читаются профили, свои рецепты/ингредиенты и недели текущая ±1; остальные недели по запросу (`fetchOne`).
+- Чистая локальная копия тоже мёрджится с пришедшей: защита от устаревшего ответа сразу после записи.
+- Свой рецепт/ингредиент удаляется локально, только если его нет в двух деревьях подряд.
+- Файл, не прошедший zod, в кэш не попадает, статус синка "Ошибка" с путём файла.
+- Коммит: `{имя профиля}: {создать|обновить|удалить} {путь}`.
+- Пустой репо: дерево отвечает 409 → "Создай README в propitanie_bd и попробуй снова".
 
 ## Дизайн "Эмаль и скотч"
 Токены в `src/styles/tokens.css`. Фирменная деталь одна: скотч (`ui/Tape`). Объём: кант + блик (`--glint`), без серых теней.
@@ -66,5 +87,5 @@ typecheck, lint, test, build, validate:data зелёные; деплой в Acti
 
 ## Статус
 - [x] Этап 1: каркас, дизайн-система, навигация, деплой (экраны с заглушками)
-- [ ] Этап 2: слой данных
+- [x] Этап 2: слой данных, экран подключения, индикатор синка, переключатель профиля, выход, экспорт
 - [ ] Этапы 3–8

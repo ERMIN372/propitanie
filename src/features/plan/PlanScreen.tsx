@@ -59,7 +59,7 @@ export function PlanScreen() {
 
       <div className={s.days} role="group" aria-label="Дни недели">
         {days.map((d, i) => (
-          <Chip key={i} selected={i === day} onClick={() => setDay(i)} sub={d.getDate()} label={d.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' })}>
+          <Chip key={i} className={s.dayChip} selected={i === day} onClick={() => setDay(i)} sub={d.getDate()} label={d.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' })}>
             {DAY_SHORT[i]}
           </Chip>
         ))}
@@ -68,7 +68,7 @@ export function PlanScreen() {
       <Card className={s.norm}>
         <div className={s.normHead}>
           <span className={s.normCaption}>Норма дня</span>
-          <Tape size="big" tilt={-2}>
+          <Tape size="big" tilt={-2} className={s.normTape}>
             0 / 2000
           </Tape>
         </div>
