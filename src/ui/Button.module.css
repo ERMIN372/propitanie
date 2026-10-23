@@ -1,0 +1,48 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  padding: 10px 20px;
+  border-radius: var(--r-btn);
+  border: var(--rim-w) solid transparent;
+  font-weight: 600;
+  font-size: 16px;
+  transition: transform 0.08s ease-out;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: var(--tomato);
+  color: var(--on-tomato);
+  box-shadow: inset 0 2px 0 rgb(255 255 255 / 0.25);
+}
+
+.primary:active:not(:disabled) {
+  background: var(--tomato-press);
+}
+
+.secondary {
+  background: var(--surface);
+  border-color: var(--cobalt);
+  color: var(--cobalt);
+  box-shadow: var(--glint);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--cobalt);
+}
+
+.block {
+  width: 100%;
+}

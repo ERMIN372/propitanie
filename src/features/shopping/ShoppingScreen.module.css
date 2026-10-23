@@ -1,0 +1,33 @@
+.receipt {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: var(--s-6) var(--s-5) var(--s-7);
+  background: var(--surface);
+  border-radius: var(--r-card) var(--r-card) 0 0;
+  /* зубчатый нижний край чека */
+  --tooth: 14px;
+  mask:
+    linear-gradient(#000 0 0) top / 100% calc(100% - var(--tooth)) no-repeat,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / var(--tooth) var(--tooth) repeat-x;
+}
+
+.head {
+  text-align: center;
+  display: grid;
+  gap: var(--s-1);
+  padding-bottom: var(--s-4);
+  border-bottom: 2px dashed color-mix(in srgb, var(--ink) 25%, transparent);
+}
+
+.store {
+  font-family: var(--f-display);
+  color: var(--cobalt);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.date {
+  font-size: 14px;
+  color: var(--ink-2);
+}

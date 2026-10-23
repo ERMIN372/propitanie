@@ -1,0 +1,79 @@
+.bar {
+  max-width: var(--col-max);
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top) + var(--s-3)) var(--s-4) 0;
+  display: grid;
+  gap: var(--s-3);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  min-height: var(--tap);
+}
+
+.people {
+  display: flex;
+  gap: var(--s-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px;
+}
+
+.person {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 4px 12px 4px 6px;
+  border-radius: var(--r-chip);
+  border: 2px solid transparent;
+  background: transparent;
+  font-weight: 600;
+  color: var(--ink-2);
+  position: relative;
+}
+
+/* зона нажатия 44 px при визуальной высоте 36 */
+.person::after {
+  content: '';
+  position: absolute;
+  inset: -4px 0;
+}
+
+.person[aria-pressed='true'] {
+  border-color: var(--cobalt);
+  background: var(--surface);
+  color: var(--cobalt);
+}
+
+.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--cobalt);
+  background: var(--c);
+}
+
+.sync {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: var(--tap);
+  padding: 0 var(--s-2);
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.light {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c);
+}

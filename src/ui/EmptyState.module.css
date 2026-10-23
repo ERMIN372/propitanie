@@ -1,0 +1,13 @@
+.empty {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: var(--s-4);
+  padding: var(--s-7) var(--s-4);
+}
+
+.text {
+  color: var(--ink-2);
+  max-width: 30ch;
+  margin: 0;
+}

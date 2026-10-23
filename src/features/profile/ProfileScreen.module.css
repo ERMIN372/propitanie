@@ -1,0 +1,38 @@
+.label {
+  font-weight: 600;
+  margin: 0 0 var(--s-2);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.hello {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-3);
+  text-align: center;
+}
+
+.muted {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.section {
+  display: grid;
+  gap: var(--s-3);
+  justify-items: start;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: var(--rim);
+  background: var(--c);
+  box-shadow: var(--glint), inset 0 0 0 8px var(--surface);
+}

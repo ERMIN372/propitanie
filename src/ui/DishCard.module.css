@@ -1,0 +1,64 @@
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--s-4);
+  padding: var(--s-4);
+  background: var(--surface);
+  border-radius: var(--r-card);
+  border: 2px solid color-mix(in srgb, var(--cobalt) 22%, transparent);
+  box-shadow: var(--glint);
+  text-align: left;
+  width: 100%;
+  color: inherit;
+}
+
+.bowlWrap {
+  position: relative;
+}
+
+.tape {
+  position: absolute;
+  left: 34px;
+  top: 10px;
+  max-width: calc(100% - 50px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.body {
+  display: grid;
+  gap: 6px;
+  padding-top: 34px;
+  min-width: 0;
+}
+
+.kcal {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--cobalt);
+}
+
+.macros {
+  display: flex;
+  gap: var(--s-3);
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+  margin-right: 4px;
+}
+
+.meta {
+  font-size: 13px;
+  color: var(--ink-2);
+}

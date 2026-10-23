@@ -1,0 +1,53 @@
+.bar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--surface);
+  border-top: var(--rim);
+  border-radius: var(--r-sheet) var(--r-sheet) 0 0;
+  box-shadow: var(--glint);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  max-width: var(--col-max);
+  margin: 0;
+  padding: 6px 4px;
+  list-style: none;
+}
+
+.link {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  min-height: 56px;
+  padding: 6px 2px;
+  border-radius: var(--r-btn);
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 30px;
+  border-radius: var(--r-chip);
+}
+
+.active {
+  color: var(--cobalt);
+}
+
+.active .icon {
+  background: var(--tape);
+  color: var(--tape-ink);
+  transform: rotate(-2deg);
+}
