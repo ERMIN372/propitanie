@@ -1,0 +1,14 @@
+.bowl {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--size, 72px);
+  height: var(--size, 72px);
+  border-radius: 50%;
+  background: var(--surface);
+  border: var(--rim);
+  /* внутренний бортик миски и блик эмали сверху */
+  box-shadow: var(--glint), inset 0 0 0 calc(var(--size, 72px) * 0.07) var(--surface-2);
+  font-size: calc(var(--size, 72px) * 0.5);
+  line-height: 1;
+}

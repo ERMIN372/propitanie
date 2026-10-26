@@ -1,0 +1,86 @@
+/* Дизайн-токены "Эмаль и скотч". Тёмная тема "Чугун". */
+:root {
+  --bg: #eef2f4;
+  --surface: #ffffff;
+  --surface-2: #e3e8ec;
+  --ink: #23262d;
+  --ink-2: #4a4f59;
+  --cobalt: #1c2e8c;
+  --tomato: #e2412e;
+  --tomato-press: #c93422;
+  --on-tomato: #ffffff;
+  --mustard: #edb021;
+  --pea: #4e9a51;
+  --pea-ink: #367a3a;
+  --tape: #e9ddb0;
+  --tape-ink: #2b2a26;
+  --protein: var(--tomato);
+  --fat: var(--mustard);
+  --carbs: var(--pea);
+  --focus: #1c2e8c;
+
+  --rim-w: 3px;
+  --rim: var(--rim-w) solid var(--cobalt);
+  --glint: inset 0 2px 0 rgb(255 255 255 / 0.75);
+
+  --r-sheet: 28px;
+  --r-card: 18px;
+  --r-btn: 14px;
+  --r-chip: 999px;
+
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-7: 32px;
+  --s-8: 48px;
+
+  --tap: 44px;
+  --col-max: 480px;
+  --tabbar-h: 68px;
+
+  --f-display: 'Unbounded Variable', system-ui, sans-serif;
+  --f-text: 'Golos Text Variable', system-ui, sans-serif;
+  --f-tape: 'Caveat Variable', cursive;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #1b1d21;
+    --surface: #262a31;
+    --surface-2: #31363f;
+    --ink: #e8eaee;
+    --ink-2: #b4b9c3;
+    --cobalt: #8c9dff;
+    --tomato: #e0594a;
+    --tomato-press: #c84a3c;
+    --mustard: #d9a52b;
+    --pea: #5fa862;
+    --pea-ink: #7cc07f;
+    --focus: #8c9dff;
+    --glint: inset 0 1px 0 rgb(255 255 255 / 0.07);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'],
+.theme-cast-iron {
+  --bg: #1b1d21;
+  --surface: #262a31;
+  --surface-2: #31363f;
+  --ink: #e8eaee;
+  --ink-2: #b4b9c3;
+  --cobalt: #8c9dff;
+  --tomato: #e0594a;
+  --tomato-press: #c84a3c;
+  --mustard: #d9a52b;
+  --pea: #5fa862;
+  --pea-ink: #7cc07f;
+  --focus: #8c9dff;
+  --glint: inset 0 1px 0 rgb(255 255 255 / 0.07);
+  color-scheme: dark;
+}
